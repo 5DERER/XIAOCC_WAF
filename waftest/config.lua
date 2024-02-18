@@ -29,7 +29,7 @@ config_post_check = "on"
 --config waf output redirect/html
 config_waf_output = "html"
 --if config_waf_output ,setting url
-config_waf_redirect_url = "https://www.unixhot.com"
+config_waf_redirect_url = "https://www.baidu.com"
 config_output_html=[[
 <html>
 <head>
