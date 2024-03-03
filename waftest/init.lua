@@ -161,7 +161,7 @@ function user_agent_attack_check()
     end
     return false
 end
-
+####################################
 --post_attack_check
 function post_attack_check()
     if config_post_check == "on" then
@@ -170,6 +170,26 @@ function post_attack_check()
             local POST_ARGS = ngx.req.get_post_args()
         end
         return true
+    end
+    return false
+end
+#####################################
+
+function post_attack_check()
+    if config_post_check == "on" then
+        local POST_RULES = get_rule('Post.rule')
+        local REQUEST_METHOD = ngx.var.request_method
+        if REQUEST_METHOD == "POST" then
+            for _, rule in pairs(POST_RULES) do
+                if rule ~= "" and rulematch(ngx.var.request_uri, rule, "jo") then
+                    log_record('Deny_POST', ngx.var.request_uri, "-", rule)
+                    if config_waf_enable == "on" then
+                        waf_output()
+                        return true
+                    end
+                end
+            end
+        end
     end
     return false
 end
