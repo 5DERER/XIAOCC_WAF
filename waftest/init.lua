@@ -1,4 +1,3 @@
---WAF Action
 require 'config'
 require 'lib'
 
@@ -6,7 +5,7 @@ require 'lib'
 local rulematch = ngx.re.find
 local unescape = ngx.unescape_uri
 
---allow white ip
+--white_ip_check
 function white_ip_check()
      if config_white_ip_check == "on" then
         local IP_WHITE_RULE = get_rule('WhiteIp.rule')
@@ -22,7 +21,7 @@ function white_ip_check()
     end
 end
 
---deny black ip
+--black_ip_check
 function black_ip_check()
      if config_black_ip_check == "on" then
         local IP_BLACK_RULE = get_rule('BlackIp.rule')
@@ -41,7 +40,7 @@ function black_ip_check()
     end
 end
 
---allow white url
+--white_url_check
 function white_url_check()
     if config_white_url_check == "on" then
         local URL_WHITE_RULES = get_rule('WhiteUrl.rule')
@@ -56,7 +55,7 @@ function white_url_check()
     end
 end
 
---deny cc attack
+--cc_attack_check
 function cc_attack_check()
     if config_cc_check == "on" then
         local ATTACK_URI=ngx.var.uri
@@ -81,7 +80,7 @@ function cc_attack_check()
     return false
 end
 
---deny cookie
+--cookie_attack_check
 function cookie_attack_check()
     if config_cookie_check == "on" then
         local COOKIE_RULES = get_rule('Cookie.rule')
@@ -101,7 +100,7 @@ function cookie_attack_check()
     return false
 end
 
---deny url
+--url_attack_check
 function url_attack_check()
     if config_url_check == "on" then
         local URL_RULES = get_rule('Url.rule')
@@ -119,7 +118,7 @@ function url_attack_check()
     return false
 end
 
---deny url args
+--url_args_attack_check
 function url_args_attack_check()
     if config_url_args_check == "on" then
         local ARGS_RULES = get_rule('Args.rule')
@@ -143,7 +142,7 @@ function url_args_attack_check()
     end
     return false
 end
---deny user agent
+--user_agent_attack_check
 function user_agent_attack_check()
     if config_user_agent_check == "on" then
         local USER_AGENT_RULES = get_rule('UserAgent.rule')
@@ -163,7 +162,7 @@ function user_agent_attack_check()
     return false
 end
 
---deny post
+--post_attack_check
 function post_attack_check()
     if config_post_check == "on" then
         local POST_RULES = get_rule('Post.rule')
