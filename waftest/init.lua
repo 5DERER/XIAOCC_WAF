@@ -161,20 +161,7 @@ function user_agent_attack_check()
     end
     return false
 end
-####################################
 --post_attack_check
-function post_attack_check()
-    if config_post_check == "on" then
-        local POST_RULES = get_rule('Post.rule')
-        for _,rule in pairs(ARGS_RULES) do
-            local POST_ARGS = ngx.req.get_post_args()
-        end
-        return true
-    end
-    return false
-end
-#####################################
-
 function post_attack_check()
     if config_post_check == "on" then
         local POST_RULES = get_rule('Post.rule')
